@@ -1,0 +1,26 @@
+﻿h1, h2, h3, nav, footer {
+ font-family: Georgia, Cambria, "Times New Roman", serif;
+}
+body {
+   font-family: "Lucida Sans", Verdana, Arial, sans-serif;
+   font-size: 80%;
+}
+
+/* TODO: add a background image here somehow */
+.background-image-blur-whitewash {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-size: cover;
+   background-position: center;
+   filter: blur(15px) contrast(0.2) brightness(1.7);
+   z-index: -1;
+}
+
+#character-table {
+   width: 100%;
+   border-collapse: collapse;
+   padding: 10px;
+}
