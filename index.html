@@ -8,23 +8,53 @@
    <script defer type="text/javascript" src="index.js"></script> 
 </head>
 <body>
+   <div style="width: 100%; background-color: black; height: 200px; color: white; display: flex; align-items: center; justify-content: center; flex-direction: column; padding-top: 20px;">
+      <h1 style="font-size: 100px;">Cartoonopia</h1>
+      <p>The home of characters and cartoons</p>
+   </div>
    <div class="background-image-blur-whitewash"></div>
-   <form id="search-form">
-      <input id="search-input" type="text" placeholder="Search for a character">
-   <table id="character-table">
-      <tr>
-         <th>Name</th>
-         <th>Strength</th>
-         <th>Speed</th>
-         <th>Skill</th>
-         <th>Fear Factor</th>
-         <th>Power</th>
-         <th>Intelligence</th>
-         <th>Wealth</th>
-         <th>Selected</th>
-      </tr>
-      <!-- insert a row for each character here using javascript-->
-   </table>
+   <div id="search-character" style="display: flex; margin:30px 50px ;">
+      <div id="filter" style="background: red;width: 20em;height: 30em">
+         <div style="margin:20px;border-color: black;box-shadow: 5px 5px 2px gray;background: white;">
+            <p style="padding-top:10px; margin-left: 20px;">Filters</p>
+            <hr style="width: 100px;margin-left: 10px;margin-top: 5px"/>
+            <div style="display: flex">
+               <p style="margin-left: 10px; width: 35%;">Strength</p>
+               <div class="container">
+                  <div class="slider-track"></div>
+                  <div class="values" style="display: flex; font-size: 10px; color: black;">
+                      <p id="range1">0</p>
+                      <p id="range2">100</p>
+                  </div>
+                  <input type="range" min="0" max="100" value="10" id="sliderLeft" oninput="slideLeft()">
+                  <input type="range" min="0" max="100" value="90" id="sliderRight" oninput="slideRight()">
+              </div>
+            </div>
+         </div>
+      </div>
+      <div id="content" style="flex-grow: 1">
+         <form id="search-form">
+            <input id="search-input" type="text" placeholder="Search for a character" />
+         </form>
+         <table id="character-table" >
+            <tr>
+               <th>Name</th>
+               <th>Strength</th>
+               <th>Speed</th>
+               <th>Skill</th>
+               <th>Fear Factor</th>
+               <th>Power</th>
+               <th>Intelligence</th>
+               <th>Wealth</th>
+               <th>Selected</th>
+            </tr>
+            <!-- insert a row for each character here using javascript-->
+         </table>
+      </div>
+      <div id="history" style="background: red;width: 20em;height: 30em">
+
+      </div>
+   </div>
  
 </body>
 </html>
