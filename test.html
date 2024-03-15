@@ -1,33 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Double Range Slider</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Custom Checkbox</title>
+<style>
+  .checkbox-custom {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .checkbox-custom + label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+  }
+  .checkbox-custom + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 0px solid #000; 
+    background-color: transparent; 
+  }
+
+  .checkbox-custom:checked + label:before {
+    background-color: transparent; 
+    border: 2px solid #000;
+  }
+
+  .checkbox-custom:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .checkbox-custom + label:before, .checkbox-custom + label:after {
+    box-shadow: none;
+  }
+</style>
 </head>
 <body>
-<div class="wrapper">
-    <!-- <div class="values">
-            <span id="range1">
-                0
-            </span>
-        <span> &dash; </span>
-        <span id="range2">
-                100
-            </span>
-    </div> -->
-    <div class="container">
-        <div class="slider-track"></div>
-        <div class="values">
-            <p id="range1">0</p>
-            <p id="range2">100</p>
-        </div>
-        <input type="range" min="0" max="100" value="10" id="sliderLeft" oninput="slideLeft()">
-        <input type="range" min="0" max="100" value="90" id="sliderRight" oninput="slideRight()">
-    </div>
+
+<div name="checkboxCustom">
+    <input type="checkbox" id="checkboxCustom" checked class="checkbox-custom">
+    <label for="checkboxCustom"></label>
 </div>
 
-<!--Script-->
-<script src="js.js"></script>
 </body>
 </html>

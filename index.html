@@ -8,53 +8,120 @@
    <script defer type="text/javascript" src="index.js"></script> 
 </head>
 <body>
-   <div style="width: 100%; background-color: black; height: 200px; color: white; display: flex; align-items: center; justify-content: center; flex-direction: column; padding-top: 20px;">
-      <h1 style="font-size: 100px;">Cartoonopia</h1>
+   <div class="title">
+      <h1 class="title-label">Cartoonopia</h1>
       <p>The home of characters and cartoons</p>
    </div>
    <div class="background-image-blur-whitewash"></div>
-   <div id="search-character" style="display: flex; margin:30px 50px ;">
-      <div id="filter" style="background: red;width: 20em;height: 30em">
-         <div style="margin:20px;border-color: black;box-shadow: 5px 5px 2px gray;background: white;">
-            <p style="padding-top:10px; margin-left: 20px;">Filters</p>
-            <hr style="width: 100px;margin-left: 10px;margin-top: 5px"/>
-            <div style="display: flex">
-               <p style="margin-left: 10px; width: 35%;">Strength</p>
-               <div class="container">
-                  <div class="slider-track"></div>
-                  <div class="values" style="display: flex; font-size: 10px; color: black;">
-                      <p id="range1">0</p>
-                      <p id="range2">100</p>
+   <div id="search-character" class="search-character">
+      <div id="filter" class="filterSection">
+         <div id="injection" class="filter-injection">
+            <p class="filter-injection-Lable">Filters</p>
+            <hr class="filter-injection-hr"/>
+            <!-- insert slider by javascript-->
+            <!-- <div class="filter" name="doubleSliderComponent">
+               <p class="filterLable">Strength</p>
+               <div class="container" name="strength">
+                  <div class="slider-track" name="strength" id="strength-slider-track"></div>
+                  <div class="values" name="strength" >
+                      <p class="rangeLeft" name="strength" id="strength-rangeLeft">0</p>
+                      <p class="rangeRight" name="strength" id="strength-rangeRight">100</p>
                   </div>
-                  <input type="range" min="0" max="100" value="10" id="sliderLeft" oninput="slideLeft()">
-                  <input type="range" min="0" max="100" value="90" id="sliderRight" oninput="slideRight()">
+                  <input type="range" min="0" max="100" value="10" name="strength" class="inputLeft"  id="strength-inputLeft">
+                  <input type="range" min="0" max="100" value="90" name="strength" class="inputRight" id="strength-inputRight">
               </div>
             </div>
+            <div class="filter" name="doubleSliderComponent">
+               <p class="filterLable">Speed</p>
+               <div class="container" name="speed">
+                  <div class="slider-track" name="speed" id="speed-slider-track"></div>
+                  <div class="values" name="speed" >
+                      <p class="rangeLeft" name="speed" id="speed-rangeLeft">0</p>
+                      <p class="rangeRight" name="speed" id="speed-rangeRight">100</p>
+                  </div>
+                  <input type="range" min="0" max="100" value="10" name="speed" class="inputLeft"  id="speed-inputLeft">
+                  <input type="range" min="0" max="100" value="90" name="speed" class="inputRight" id="speed-inputRight">
+              </div>
+            </div> -->
          </div>
       </div>
-      <div id="content" style="flex-grow: 1">
+      <div id="content" class="contentSection">
          <form id="search-form">
             <input id="search-input" type="text" placeholder="Search for a character" />
          </form>
          <table id="character-table" >
-            <tr>
-               <th>Name</th>
-               <th>Strength</th>
-               <th>Speed</th>
-               <th>Skill</th>
-               <th>Fear Factor</th>
-               <th>Power</th>
-               <th>Intelligence</th>
-               <th>Wealth</th>
-               <th>Selected</th>
-            </tr>
-            <!-- insert a row for each character here using javascript-->
+            <thead>
+               <tr>
+                  <th>Name</th>
+                  <th>Strength</th>
+                  <th>Speed</th>
+                  <th>Skill</th>
+                  <th>Fear Factor</th>
+                  <th>Power</th>
+                  <th>Intelligence</th>
+                  <th>Wealth</th>
+                  <th>Selected</th>
+               </tr>
+            </thead>
+            <tbody>
+               <!-- insert a row for each character here using javascript-->
+            </tbody>
          </table>
       </div>
-      <div id="history" style="background: red;width: 20em;height: 30em">
-
+      <div id="history" class="historySection">
+         <div id="history" class="history-injection">
+            <p class="history-injection-Lable">Previous Comparisons</p>
+            <hr class="history-injection-hr"/>
+         </div>
       </div>
    </div>
- 
+   <div class="compare" class="compare">
+      <div class="p1" >
+         <h2 class="p1-name">p1</h2>
+         <div class="avatar-container">
+            <img class="p1-avatar" src="" />
+            <h1>?</h1>
+         </div>
+      </div>
+      <h1 class="vs">VS</h1>
+      <div class="p2" >
+         <h2 class="p2-name">p2</h2>
+         <div class="avatar-container">
+            <img class="p2-avatar" src=""  />
+            <h1>?</h1>
+         </div>
+      </div>
+   </div>
+   <div class="status" style="display: flex; align-items: center; justify-content: center;">
+      <div class="status-container" style="display: flex; height: auto; width: 60%; margin-top: 40px; margin-bottom: 40px; background-color: #1f1f1f;">
+         <div class="player-status" id="p1-player-status" style="flex-grow: 1;  display:flex; align-items: center; justify-content: center; flex-direction: column;">
+            <h1>0</h1>
+            <h1>0</h1>
+            <h1>0</h1>
+            <h1>0</h1>
+            <h1>0</h1>
+            <h1>0h1>
+            <h1>0</h1>
+         </div>
+         <div class="status-title" style="color: #fff;flex-grow: 1; display:flex; align-items: center; justify-content: center; flex-direction: column;">
+            <h1>STRENGTH</h1>
+            <h1>SPEED</h1>
+            <h1>SKILL</h1>
+            <h1>FEAR</h1>
+            <h1>POWER</h1>
+            <h1>INTELLIGENCE</h1>
+            <h1>WEALTH</h1>
+         </div>
+         <div class="player-status" id="p2-player-status" style="flex-grow: 1;  display:flex; align-items: center; justify-content: center; flex-direction: column;">
+            <h1>100</h1>
+            <h1>100</h1>
+            <h1>100</h1>
+            <h1>100</h1>
+            <h1>100</h1>
+            <h1>100</h1>
+            <h1>100</h1>
+         </div>
+      </div>
+   </div>
 </body>
 </html>

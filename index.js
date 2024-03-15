@@ -61,12 +61,29 @@ function loadCharacters() {
 
         var cell9 = row.insertCell(8);
 
-        var checkbox = document.createElement('input');
-        checkbox.type = "checkbox";
-        checkbox.checked = character.selected;
-        cell9.appendChild(checkbox);
+        //create div element
+        var checkboxDiv = document.createElement('div');
+        checkboxDiv.name = "checkboxCustom" + character.name;
+        
+        //create input element
+        var checkboxInput = document.createElement('input');
+        checkboxInput.type = "checkbox";
+        checkboxInput.id = "checkboxCustom" + character.name;
+        checkboxInput.checked = false;
+        checkboxInput.className = "checkbox-custom";
+
+        //create label element
+        var checkboxLabel = document.createElement('label');
+        checkboxLabel.htmlFor = "checkboxCustom" + character.name;
+
+        //add two elements into the div
+        checkboxDiv.appendChild(checkboxInput);
+        checkboxDiv.appendChild(checkboxLabel);
+
+        cell9.appendChild(checkboxDiv);
     });
 }
+
 
 window.onload = function () {
     getJsonObject('data.json',
@@ -81,34 +98,200 @@ window.onload = function () {
             console.error(xhr);
         }
     );
+    var filters = ['strength', 'speed', 'skill', 'fear-factor', 'power', 'intelligence', 'wealth'];
+    filters.forEach(function (filterName) {
+        initializeSlider(filterName+"-inputLeft", filterName+"-inputRight", filterName+"-rangeLeft", filterName+"-rangeRight", filterName+"-slider-track", slideLeftOnchange, slideRightOnchange);
+    });
+    // initializeSlider("strength-inputLeft", "strength-inputRight", "strength-rangeLeft", "strength-rangeRight", "strength-slider-track", slideLeftOnchange, slideRightOnchange);
+    // initializeSlider("speed-inputLeft", "speed-inputRight", "speed-rangeLeft", "speed-rangeRight", "speed-slider-track", slideLeftOnchange, slideRightOnchange);
+}
+window.onresize = function () {
     slideLeft();
     slideRight();
 }
+// //strength slider
+// let sliderLeft = document.getElementById("strength-inputLeft");;
+// let sliderRight = document.getElementById("strength-inputRight");
+// let displayValLeft = document.getElementById("strength-rangeLeft");
+// let displayValRight = document.getElementById("strength-rangeRight");
+// let sliderTrack = document.getElementById("strength-slider-track");
+// let minGap = 0;
+// let sliderMaxValue = sliderLeft.max;
+// sliderLeft.oninput = strengthSlideLeftOnchange;
+// sliderRight.oninput = strengthSlideRightOnchange;
+// //speed slider
+// let sliderLeftSpeed = document.getElementById("speed-inputLeft");
+// let sliderRightSpeed = document.getElementById("speed-inputRight");
+// let displayValLeftSpeed = document.getElementById("speed-rangeLeft");
+// let displayValRightSpeed = document.getElementById("speed-rangeRight");
+// let sliderTrackSpeed = document.getElementById("speed-slider-track");
+// let sliderMaxValueSpeed = sliderLeftSpeed.max;
+// sliderLeftSpeed.oninput = speedSlideLeftOnchange;
+// sliderRightSpeed.oninput = speedSlideRightOnchange;
 
-let sliderOne = document.getElementById("sliderLeft");
-let sliderTwo = document.getElementById("sliderRight");
-let displayValOne = document.getElementById("range1");
-let displayValTwo = document.getElementById("range2");
-let minGap = 0;
-let sliderTrack = document.querySelector(".slider-track");
-let sliderMaxValue = document.getElementById("sliderLeft").max;
+// window.onload = function () {
+//     console.log("window.onload");
+//     strengthSlideLeftOnchange();
+//     strengthSlideRightOnchange();
+//     speedSlideLeftOnchange();
+//     speedSlideRightOnchange();
+// }
+// function strengthSlideLeftOnchange(){
+//     console.log("slideLeftOnchange");
+//     if(parseInt(sliderRight.value) - parseInt(sliderLeft.value) <= minGap){
+//         sliderLeft.value = parseInt(sliderRight.value) - minGap;
+//     }
+//     displayValLeft.textContent = sliderLeft.value;
+//     displayValLeft.style.left = (sliderLeft.value / sliderMaxValue) * 80 + 6 +"%";
+//     strengthFillColor();
+// }
+// function strengthSlideRightOnchange(){
+//     console.log("slideRightOnchange");
+//     if (parseInt(sliderRight.value) - parseInt(sliderLeft.value) <= minGap) {
+//         sliderRight.value = parseInt(sliderLeft.value) + minGap;
+//     }
+//     displayValRight.textContent = sliderRight.value;
+//     displayValRight.style.left = (sliderRight.value / sliderMaxValue) * 80 + 6 +"%";
+//     strengthFillColor();
+// }
 
-function slideLeft(){
-    if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
-        sliderOne.value = parseInt(sliderTwo.value) - minGap;
-    }
-    displayValOne.textContent = sliderOne.value;
-    fillColor();
+// function strengthFillColor(){
+//     percent1 = (sliderLeft.value / sliderMaxValue) * 100;
+//     percent2 = (sliderRight.value / sliderMaxValue) * 100;
+//     sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #000 ${percent1}% , #000 ${percent2}%, #dadae5 ${percent2}%)`;
+// }
+
+// //speed slider
+// function speedSlideLeftOnchange(){
+//     console.log("slideLeftOnchange");
+//     if(parseInt(sliderRightSpeed.value) - parseInt(sliderLeftSpeed.value) <= minGap){
+//         sliderLeftSpeed.value = parseInt(sliderRightSpeed.value) - minGap;
+//     }
+//     displayValLeftSpeed.textContent = sliderLeftSpeed.value;
+//     displayValLeftSpeed.style.left = (sliderLeftSpeed.value / sliderMaxValueSpeed) * 80 + 6 +"%";
+//     speedFillColor();
+// }
+// function speedSlideRightOnchange(){
+//     console.log("slideRightOnchange");
+//     if (parseInt(sliderRightSpeed.value) - parseInt(sliderLeftSpeed.value) <= minGap) {
+//         sliderRightSpeed.value = parseInt(sliderLeftSpeed.value) + minGap;
+//     }
+//     displayValRightSpeed.textContent = sliderRightSpeed.value;
+//     displayValRightSpeed.style.left = (sliderRightSpeed.value / sliderMaxValueSpeed) * 80 + 6 +"%";
+//     speedFillColor();
+// }
+// function speedFillColor(){
+//     percent1 = (sliderLeftSpeed.value / sliderMaxValueSpeed) * 100;
+//     percent2 = (sliderRightSpeed.value / sliderMaxValue) * 100;
+//     sliderTrackSpeed.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #000 ${percent1}% , #000 ${percent2}%, #dadae5 ${percent2}%)`;
+// }
+document.addEventListener('DOMContentLoaded', function () {
+    var filters = ['strength', 'speed', 'skill', 'fear-Factor', 'power', 'intelligence', 'wealth'];
+    var filterContainer = document.getElementById('injection');
+
+    filters.forEach(function (filterName) {
+        var filterDiv = document.createElement('div');
+        filterDiv.className = 'filter';
+        filterDiv.setAttribute('name', 'doubleSliderComponent');
+
+        var label = document.createElement('p');
+        label.className = 'filterLabel';
+        label.textContent = filterName;
+
+        var containerDiv = document.createElement('div');
+        containerDiv.className = 'container';
+        containerDiv.setAttribute('name', filterName.toLowerCase());
+
+        var sliderTrackDiv = document.createElement('div');
+        sliderTrackDiv.className = 'slider-track';
+        sliderTrackDiv.setAttribute('name', filterName.toLowerCase());
+        sliderTrackDiv.id = filterName.toLowerCase() + '-slider-track';
+
+        var valuesDiv = document.createElement('div');
+        valuesDiv.className = 'values';
+        valuesDiv.setAttribute('name', filterName.toLowerCase());
+
+        var rangeLeftP = document.createElement('p');
+        rangeLeftP.className = 'rangeLeft';
+        rangeLeftP.id = filterName.toLowerCase() + '-rangeLeft';
+        rangeLeftP.textContent = '0';
+
+        var rangeRightP = document.createElement('p');
+        rangeRightP.className = 'rangeRight';
+        rangeRightP.id = filterName.toLowerCase() + '-rangeRight';
+        rangeRightP.textContent = '100';
+
+        var inputLeft = document.createElement('input');
+        inputLeft.type = 'range';
+        inputLeft.min = '0';
+        inputLeft.max = '100';
+        inputLeft.value = '0';
+        inputLeft.className = 'inputLeft';
+        inputLeft.id = filterName.toLowerCase() + '-inputLeft';
+
+        var inputRight = document.createElement('input');
+        inputRight.type = 'range';
+        inputRight.min = '0';
+        inputRight.max = '100';
+        inputRight.value = '100';
+        inputRight.className = 'inputRight';
+        inputRight.id = filterName.toLowerCase() + '-inputRight';
+
+        valuesDiv.appendChild(rangeLeftP);
+        valuesDiv.appendChild(rangeRightP);
+
+        containerDiv.appendChild(sliderTrackDiv);
+        containerDiv.appendChild(valuesDiv);
+        containerDiv.appendChild(inputLeft);
+        containerDiv.appendChild(inputRight);
+
+        filterDiv.appendChild(label);
+        filterDiv.appendChild(containerDiv);
+
+        filterContainer.appendChild(filterDiv);
+    });
+});
+
+function initializeSlider(sliderIdLeft, sliderIdRight, displayIdLeft, displayIdRight, trackId, onChangeLeft, onChangeRight) {
+    //get elements
+    let sliderLeft = document.getElementById(sliderIdLeft);
+    let sliderRight = document.getElementById(sliderIdRight);
+    let displayValLeft = document.getElementById(displayIdLeft);
+    let displayValRight = document.getElementById(displayIdRight);
+    let sliderTrack = document.getElementById(trackId);
+    let minGap = 0;
+    let sliderMaxValue = sliderLeft.max;
+
+    //register the onValueChange event listeners
+    sliderLeft.oninput = () => onChangeLeft(sliderLeft, sliderRight, displayValLeft, displayValRight, sliderTrack, minGap, sliderMaxValue);
+    sliderRight.oninput = () => onChangeRight(sliderLeft, sliderRight, displayValLeft, displayValRight, sliderTrack, minGap, sliderMaxValue);
+    
+    //first rendering of the slider
+    onChangeLeft(sliderLeft, sliderRight, displayValLeft, displayValRight, sliderTrack, minGap, sliderMaxValue);
+    onChangeRight(sliderLeft, sliderRight, displayValLeft, displayValRight, sliderTrack, minGap, sliderMaxValue);
 }
-function slideRight(){
-    if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
-        sliderTwo.value = parseInt(sliderOne.value) + minGap;
+//onSlideLeftOnchange
+function slideLeftOnchange(sliderLeft, sliderRight, displayValLeft, displayValRight, sliderTrack, minGap, sliderMaxValue) {
+    if (parseInt(sliderRight.value) - parseInt(sliderLeft.value) <= minGap) {
+        sliderLeft.value = parseInt(sliderRight.value) - minGap;
     }
-    displayValTwo.textContent = sliderTwo.value;
-    fillColor();
+    displayValLeft.textContent = sliderLeft.value;
+    displayValLeft.style.left = (sliderLeft.value / sliderMaxValue) * 80 + 6 +"%";
+    updateSliderFill(sliderLeft, sliderRight, sliderTrack, sliderMaxValue);
 }
-function fillColor(){
-    percent1 = (sliderOne.value / sliderMaxValue) * 100;
-    percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+//onSlideRightOnchange
+function slideRightOnchange(sliderLeft, sliderRight, displayValLeft, displayValRight, sliderTrack, minGap, sliderMaxValue) {
+    if (parseInt(sliderRight.value) - parseInt(sliderLeft.value) <= minGap) {
+        sliderRight.value = parseInt(sliderLeft.value) + minGap;
+    }
+    displayValRight.textContent = sliderRight.value;
+    displayValRight.style.left = (sliderRight.value / sliderMaxValue) * 78 + 6 +"%";
+    updateSliderFill(sliderLeft, sliderRight, sliderTrack, sliderMaxValue);
+}
+//render the slider background fill
+function updateSliderFill(sliderLeft, sliderRight, sliderTrack, sliderMaxValue) {
+    let percent1 = (sliderLeft.value / sliderMaxValue) * 100;
+    let percent2 = (sliderRight.value / sliderMaxValue) * 100;
     sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #000 ${percent1}% , #000 ${percent2}%, #dadae5 ${percent2}%)`;
 }
+
