@@ -5,7 +5,6 @@ characterList = []; // character list container
 
 function processSearch(event) {
     var searchValue = event.target.value;
-    console.log(searchValue);
     search(searchValue);
 }
 
@@ -79,6 +78,7 @@ function loadCharacters( renderCharacterList) {
         checkboxInput.className = "checkbox-custom";
         checkboxInput.onchange = function () {
             if (checkboxInput.checked) {
+                easterEgg(character);
                 if(clickedCharacter.length < 2){ //if the clicked character is less than 2
                     clickedCharacter.push(character); //add to the clickedCharacter array
                 }else{
@@ -90,7 +90,6 @@ function loadCharacters( renderCharacterList) {
                     return item !== character
                 })
             }
-            console.log(clickedCharacter);
             //reset to defalut status
             var p1name = document.getElementById("p1-name");
             var p1avatar = document.getElementById("p1-avatar");
@@ -106,7 +105,6 @@ function loadCharacters( renderCharacterList) {
             clickedCharacter.forEach(function (character, index) {
                 if(index === 0){
                     p1name.innerHTML = character.name;
-                    console.log(character.avatar);
                     p1avatar.src = character.image_url;
                     p1avatar.style.zIndex = 3;
                 }else if(index === 1){
@@ -184,7 +182,10 @@ function loadCharacters( renderCharacterList) {
         cell9.appendChild(checkboxDiv);
     });
 }
-
+function easterEgg(character){
+    console.warn("cannot belive you are reading this");
+    console.warn("easterEgg-" + character.subtitle);
+}
 function reloadCharacters() {
     renderCharacterList = characterList;
     
@@ -192,8 +193,8 @@ function reloadCharacters() {
     var table = document.getElementById("character-table");
     var tablebody = table.getElementsByTagName('tbody')[0];
     tablebody.innerHTML = "";
-    //characters with matching filter values
-    console.log(filterValues);    renderCharacterList = characterList.filter(function (character) {
+    //characters with matching filter values 
+    renderCharacterList = characterList.filter(function (character) {
         return character.strength >= filterValues['strength-inputLeft'] && character.strength <= filterValues['strength-inputRight']
             && character.speed >= filterValues['speed-inputLeft'] && character.speed <= filterValues['speed-inputRight']
             && character.skill >= filterValues['skill-inputLeft'] && character.skill <= filterValues['skill-inputRight']
@@ -209,7 +210,6 @@ function reloadCharacters() {
             return character.name.toLowerCase().includes(searchValue.toLowerCase());
         });
     }
-    console.log(renderCharacterList,"renderCharacterList");
     loadCharacters(renderCharacterList);
 }
 
@@ -218,12 +218,10 @@ function loadPreviousComparisons(){
     history = history.slice(-10); //get the last 5 comparisons
     history = history.reverse(); //reverse the order
 
-    console.log(history,"history");
     var historyContainer = document.getElementById("history-autoinject");
     historyContainer.innerHTML = "";
 
     history.forEach(function (record) {
-        console.log(record,"record");
         var recordDiv = document.createElement('div');
         recordDiv.className = "record";
         var leftDiv = document.createElement('div');
@@ -243,8 +241,8 @@ window.onload = function () {
     getJsonObject('data.json',
         function (data) {
             characterList = data.Characters; // store the character list into characterList
-            console.log(characterList); // print it into console (developer tools)
-            console.log(characterList[0]); // print the first character object to the console
+            // console.log(characterList); // print it into console (developer tools)
+            // console.log(characterList[0]); // print the first character object to the console
             // here you can call methods to load or refresh the page
             loadCharacters(characterList) //or refreshPage()
         },
