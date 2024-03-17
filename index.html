@@ -47,7 +47,7 @@
       </div>
       <div id="content" class="contentSection">
          <form id="search-form">
-            <input id="search-input" type="text" placeholder="Search for a character" />
+            <input id="search-input" type="text" placeholder="Search for a character" onchange="reloadCharacters()" oninput="reloadCharacters()"/>
          </form>
          <table id="character-table" >
             <thead>
@@ -68,42 +68,38 @@
             </tbody>
          </table>
       </div>
-      <div id="history" class="historySection">
+      <div id="historySection" class="historySection">
          <div id="history" class="history-injection">
             <p class="history-injection-Lable">Previous Comparisons</p>
             <hr class="history-injection-hr"/>
+            <div class="history-autoinject" id="history-autoinject">
+               <!-- insert history by javascript-->
+            </div>
          </div>
       </div>
    </div>
    <div class="compare" class="compare">
       <div class="p1" >
-         <h2 class="p1-name">p1</h2>
+         <p class="p1-name" id="p1-name">UNKNOW</p>
          <div class="avatar-container">
-            <img class="p1-avatar" src="" />
+            <img class="p1-avatar" id="p1-avatar"/>
             <h1>?</h1>
          </div>
       </div>
       <h1 class="vs">VS</h1>
       <div class="p2" >
-         <h2 class="p2-name">p2</h2>
+         <p class="p2-name" id="p2-name">UNKNOW</p>
          <div class="avatar-container">
-            <img class="p2-avatar" src=""  />
+            <img class="p2-avatar"id="p2-avatar"/>
             <h1>?</h1>
          </div>
       </div>
    </div>
-   <div class="status" style="display: flex; align-items: center; justify-content: center;">
-      <div class="status-container" style="display: flex; height: auto; width: 60%; margin-top: 40px; margin-bottom: 40px; background-color: #1f1f1f;">
-         <div class="player-status" id="p1-player-status" style="flex-grow: 1;  display:flex; align-items: center; justify-content: center; flex-direction: column;">
-            <h1>0</h1>
-            <h1>0</h1>
-            <h1>0</h1>
-            <h1>0</h1>
-            <h1>0</h1>
-            <h1>0h1>
-            <h1>0</h1>
+   <div class="status">
+      <div class="status-container" id="status-container">
+         <div class="player-status" id="p1-player-status">
          </div>
-         <div class="status-title" style="color: #fff;flex-grow: 1; display:flex; align-items: center; justify-content: center; flex-direction: column;">
+         <div class="status-title">
             <h1>STRENGTH</h1>
             <h1>SPEED</h1>
             <h1>SKILL</h1>
@@ -112,14 +108,7 @@
             <h1>INTELLIGENCE</h1>
             <h1>WEALTH</h1>
          </div>
-         <div class="player-status" id="p2-player-status" style="flex-grow: 1;  display:flex; align-items: center; justify-content: center; flex-direction: column;">
-            <h1>100</h1>
-            <h1>100</h1>
-            <h1>100</h1>
-            <h1>100</h1>
-            <h1>100</h1>
-            <h1>100</h1>
-            <h1>100</h1>
+         <div class="player-status" id="p2-player-status">
          </div>
       </div>
    </div>
