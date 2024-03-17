@@ -128,9 +128,11 @@ function loadCharacters( renderCharacterList) {
                 p2content.innerHTML = "";
                 //create the comparison elements
                 var p1result = document.createElement('div');
-                p1result.style.cssText = "display: flex; flex-direction: column; align-items: center; justify-content: space-between;";
+                p1result.className = "result";
                 var p2result = document.createElement('div');
-                p2result.style.cssText = "display: flex; flex-direction: column; align-items: center; justify-content: space-between;";
+
+                p1result.className = "player-result";
+                p2result.className = "player-result";
 
                 //store the winning elements
                 var p1wins = 0;
