@@ -83,6 +83,7 @@ function loadCharacters( renderCharacterList) {
                     clickedCharacter.push(character); //add to the clickedCharacter array
                 }else{
                     checkboxInput.checked = false; //if the clicked character is more than 2, uncheck the checkbox
+                    return;
                 }
             }else{
                 clickedCharacter = clickedCharacter.filter(function(item) {
@@ -184,17 +185,17 @@ function loadCharacters( renderCharacterList) {
 
 function reloadCharacters() {
     renderCharacterList = characterList;
+    
     //clear the table body
     var table = document.getElementById("character-table");
     var tablebody = table.getElementsByTagName('tbody')[0];
     tablebody.innerHTML = "";
     //characters with matching filter values
-    console.log(filterValues);
-    renderCharacterList = characterList.filter(function (character) {
+    console.log(filterValues);    renderCharacterList = characterList.filter(function (character) {
         return character.strength >= filterValues['strength-inputLeft'] && character.strength <= filterValues['strength-inputRight']
             && character.speed >= filterValues['speed-inputLeft'] && character.speed <= filterValues['speed-inputRight']
             && character.skill >= filterValues['skill-inputLeft'] && character.skill <= filterValues['skill-inputRight']
-            && character.fear_factor >= filterValues['fear-factor-inputLeft'] && character.fear_factor <= filterValues['fear-factor-inputRight']
+            && character.fear_factor >= filterValues['fear_factor-inputLeft'] && character.fear_factor <= filterValues['fear_factor-inputRight']
             && character.power >= filterValues['power-inputLeft'] && character.power <= filterValues['power-inputRight']
             && character.intelligence >= filterValues['intelligence-inputLeft'] && character.intelligence <= filterValues['intelligence-inputRight']
             && character.wealth >= filterValues['wealth-inputLeft'] && character.wealth <= filterValues['wealth-inputRight'];
@@ -206,12 +207,13 @@ function reloadCharacters() {
             return character.name.toLowerCase().includes(searchValue.toLowerCase());
         });
     }
+    console.log(renderCharacterList,"renderCharacterList");
     loadCharacters(renderCharacterList);
 }
 
 function loadPreviousComparisons(){
     var history = JSON.parse(localStorage.getItem("previousComparisons")) || [];
-    history = history.slice(-5); //get the last 5 comparisons
+    history = history.slice(-10); //get the last 5 comparisons
     history = history.reverse(); //reverse the order
 
     console.log(history,"history");
@@ -222,7 +224,15 @@ function loadPreviousComparisons(){
         console.log(record,"record");
         var recordDiv = document.createElement('div');
         recordDiv.className = "record";
-        recordDiv.innerHTML = record[0].name + " vs " + record[1].name;
+        var leftDiv = document.createElement('div');
+        var rightDiv = document.createElement('div');
+
+        leftDiv.appendChild(document.createTextNode(record[0].name));
+        rightDiv.appendChild(document.createTextNode(record[1].name));
+
+        recordDiv.appendChild(leftDiv);
+        recordDiv.appendChild(rightDiv);
+
         historyContainer.appendChild(recordDiv);
     });
 }
